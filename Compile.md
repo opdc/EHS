@@ -34,9 +34,9 @@ APR은 OS간의 차이를 해결해주는 라이브러리이다. 리눅스만해
 # wget http://apache.mirror.cdnetworks.com//apr/apr-util-1.6.1.tar.gz
 # tar -xvzf apr-util-1.6.1.tar.gz
 # cd apr-util-1.6.1
-# ./configure --prefix=/opt/apr-util/apr-util-1.6.3 --with-apr=/opt/apr/apr-1.6.3
+# ./configure --prefix=/opt/apr-util/apr-util-1.6.1 --with-apr=/opt/apr/apr-1.6.3
 # make
-# make test
+# make testㅡㅁ
 # make install
 ```
 
