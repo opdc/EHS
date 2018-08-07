@@ -42,7 +42,27 @@ APR은 OS간의 차이를 해결해주는 라이브러리이다. 리눅스만해
 
 이것으로 APR-util도 설치가 완료됐습니다. APR-util은 **/opt/apr-util/apr-util-1.6.1**에 설치됏습니다.
 
-### Apache 2.4 설치하기 
+### Apache 2.4 소스코드 내려받기 
+Apache 2.4 소스코드를 [공식 홈페이지](http://httpd.apache.org/download.cgi)에서 내려받습니다. 현 시점의 최신 버전인 2.4.34 기준으로 설명합니다. 
+
+```bash
+# cd /usr/local/src
+# wget http://mirror.navercorp.com/apache//httpd/httpd-2.4.34.tar.gz
+# tar -xvzf httpd-2.4.34.tar.gz
+```
+> 노트
+>> /usr/local/src에 소스를 다운로드 하는 이유?
+>>> /usr/local은 시스템 관리자가 애플리케이션 설치를 위한 경로입니다. 이 곳은 OS가 업데이트돼도 변경되지 않으며 주로 소스를 두는 경로로  /usr/local/src를 사용합니다. 
+
+### Apache 2.4 컴파일 및 설치
+Apache 2.4를 컴파일하고 설치합니다. 여기서는 최소 옵선을 사용해 컴파일하겠습니다.
+```bash
+# cd /usr/local/src/httpd-2.4.34
+# ./configure --prefix=/opt/httpd/httpd-2.4.34 --with-apr=/opt/apr/apr-1.6.3 --with-apr-util=/opt/apr-util/apr-util-1.6.1
+# make
+# make install
+```
+Apache 2.4 컴파일이 완료됐습니다. Apache 2.4는 **/opt/httpd/httpd-2.4.34**에 설치됐습니다. 
 
 
 
