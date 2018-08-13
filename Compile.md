@@ -64,5 +64,33 @@ Apache 2.4를 컴파일하고 설치합니다. 여기서는 최소 옵선을 사
 ```
 Apache 2.4 컴파일이 완료됐습니다. Apache 2.4는 **/opt/httpd/httpd-2.4.34**에 설치됐습니다. 
 
+### TroubleShooting
 
+yum install로 lua-devel 설치가 안되는 경우
 
+```bash
+# Checking package : lua-devel
+# Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+# No package lua-devel available.
+# Error: Nothing to do
+# Package installation is failed. Please check the environment.
+# Execution is failed.
+```
+lua-devel 패키지를 다운로드 받고 수정으로 패키지를 설치한다.
+
+```bash
+# curl -R -O http://mirror.centos.org/centos/7/os/x86_64/Packages/lua-devel-5.1.4-15.el7.x86_64.rpm
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 21160  100 21160    0     0  11824      0  0:00:01  0:00:01 --:--:-- 11821
+# rpm -ivh lua-devel-5.1.4-15.el7.x86_64.rpm
+warning: lua-devel-5.1.4-15.el7.x86_64.rpm: Header V3 RSA/SHA256 Signature, key ID f4a80eb5: NOKEY
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:lua-devel-5.1.4-15.el7           ################################# [100%]
+# yum list lua-devel
+Loaded plugins: amazon-id, rhui-lb, search-disabled-repos
+Installed Packages
+lua-devel.x86_64                                                                5.1.4-15.el7                                                                 installed
+#
+```
