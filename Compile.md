@@ -1,5 +1,5 @@
 
-## [CentOS/RedHat) Apache HTTP Server Compile & Install
+## [CentOS/RedHat] Apache HTTP Server Compile & Install
 
 ### 사전 준비
 Apache 2.4를 소스 코드를 이용해 설치하려면 **gcc**, **make**, **pcre**, **pcre-devel** 라이브러리가 필요하다.
@@ -77,7 +77,7 @@ yum install로 lua-devel 설치가 안되는 경우
 # Execution is failed.
 ```
 lua-devel 패키지를 다운로드 받고 수정으로 패키지를 설치한다.
-
+(https://centos.pkgs.org/7/centos-x86_64/lua-devel-5.1.4-15.el7.x86_64.rpm.html)
 ```bash
 # curl -R -O http://mirror.centos.org/centos/7/os/x86_64/Packages/lua-devel-5.1.4-15.el7.x86_64.rpm
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
