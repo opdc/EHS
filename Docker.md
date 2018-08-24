@@ -11,11 +11,39 @@ yum 리포지터리 설정을 통해 Docker CE를 설정합니다.
 
 #### 도커를 설치하기 위한 리포지토리 설정
 
+우선 yum-util과 devicemapper 패키지를 설치합니다. 
+(Amazon Linux 2는 이미 설치되어 잇습니다) 
+
 ```bash
 # yum install -y yum-utils \
   device-mapper-persistent-data \
   lvm2
 ```
+
+Docker CE를 설치하기 위해 Docker CE yum 리포지토리를 추가합니다. 
+
+```bash
+# yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+    
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+adding repo from: https://download.docker.com/linux/centos/docker-ce.repo
+grabbing file https://download.docker.com/linux/centos/docker-ce.repo to /etc/yum.repos.d/docker-ce.repo
+repo saved to /etc/yum.repos.d/docker-ce.repo
+
+# ll /etc/yum.repos.d/
+total 12
+-rw-r--r-- 1 root root  982 Jun 26 00:04 amzn2-core.repo
+-rw-r--r-- 1 root root  763 Aug 11 02:03 amzn2-extras.repo
+-rw-r--r-- 1 root root 2424 Aug 23 20:27 docker-ce.repo
+
+```
+docker-ce.repo가 추가되어 있응 것을 확인할 수 있습니다. 
+
+#### 도커 설치
+
+
 
 ### APR과 APR-util 설치
 Apache 2.4를 소스 코드로부터 설치하려면 [APR(Apache Portable Runtime)](http://apr.apache.org/)이 설치돼 있어야 한다.
