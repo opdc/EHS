@@ -43,6 +43,86 @@ docker-ce.repo가 추가되어 있응 것을 확인할 수 있습니다.
 
 #### 도커 설치
 
+Docker를 설치합니다. 
+
+```bash
+# yum install docker-ce
+
+Loaded plugins: extras_suggestions, langpacks, priorities, update-motd
+amzn2-core                                                                                                            | 2.4 kB  00:00:00
+docker-ce-stable                                                                                                      | 2.9 kB  00:00:00
+docker-ce-stable/x86_64/primary_db                                                                                    |  15 kB  00:00:00
+Resolving Dependencies
+--> Running transaction check
+---> Package docker-ce.x86_64 0:18.06.1.ce-3.el7 will be installed
+--> Processing Dependency: container-selinux >= 2.9 for package: docker-ce-18.06.1.ce-3.el7.x86_64
+--> Processing Dependency: libcgroup for package: docker-ce-18.06.1.ce-3.el7.x86_64
+--> Processing Dependency: libltdl.so.7()(64bit) for package: docker-ce-18.06.1.ce-3.el7.x86_64
+--> Running transaction check
+---> Package docker-ce.x86_64 0:18.06.1.ce-3.el7 will be installed
+--> Processing Dependency: container-selinux >= 2.9 for package: docker-ce-18.06.1.ce-3.el7.x86_64
+---> Package libcgroup.x86_64 0:0.41-13.amzn2 will be installed
+---> Package libtool-ltdl.x86_64 0:2.4.2-22.2.amzn2.0.2 will be installed
+--> Finished Dependency Resolution
+Error: Package: docker-ce-18.06.1.ce-3.el7.x86_64 (docker-ce-stable)
+           Requires: container-selinux >= 2.9
+ You could try using --skip-broken to work around the problem
+ You could try running: rpm -Va --nofiles --nodigest
+
+```
+
+Requires: container-selinux >= 2.9
+
+container-selinux 패키지 버전이 낮아서 에러가 발생했습니다. 
+
+container-selinux 최신 패키지를 설치하려면 CentOS 리포지토리에서 rpm 패키지를 내려받아 설치합니다. 
+- CentOS 리포지토리 : http://mirror.centos.org/centos/7/extras/x86_64/Packages/ 
+- rpm 파일 내려 받아 설치 하기 : container-selinux-2.42-1.gitad8f0f7.el7.noarch.rpm 패키지 설치 
+(2.42 상위 버전은 추가적으로 의존성 패키지를 설치해야 되서 2.42 버전을 설치함)
+
+```bash
+# sudo yum install -y http://mirror.centos.org/centos/7/extras/x86_64/Packages/container-selinux-2.42-1.gitad8f0f7.el7.noarch.rpm
+```
+
+다시 Docker를 설치합니다. 
+
+```bash
+# yum install docker-ce
+```
+
+이제 Docker CE버전이 설치됐습니다. 다음 명령어를 사용해  설치 여부를 확인하빈다. 
+
+```bash
+# yum list installed | grep docker-ce
+docker-ce.x86_64                      18.06.1.ce-3.el7               @docker-ce-stable
+
+```
+
+#### 도커 서비스 시작하기
+
+Docker 서비스를 시작합니다. 
+
+```bash
+# systemctl start docker
+```
+
+Docker 서비스를 시작 여부를 확인합니다.  
+
+```bash
+# systemctl status docker
+```
+
+다음 명령어를 사용해 서비스 자동실행설정을 하면 머신 재기동시 Docker 서비스가 자동으로 시작합니다.
+
+```bash
+# systemctl enable docker
+```
+
+다음 명령어를 사용해 Docker 아
+
+```bash
+# docker info
+```
 
 
 ### APR과 APR-util 설치
