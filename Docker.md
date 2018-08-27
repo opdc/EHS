@@ -124,12 +124,59 @@ Docker 서비스를 시작 여부를 확인합니다.
 # docker info
 ```
 
+### 도커 컨테이너 기본 사용법
+공개되어 있는 도커 이미지를 사용해 컨테이너의 사용법을 알아봅니다. 
+우선 공개된 도커 이미지를 내려받아 컨테이너를 기동하고 기동 여부가 확인되면 컨테이너를 정지, 삭제, 도커 이미지 삭제를 하여 기본적인 도커 이미지와 컨테이너의 라이프사이클을 살펴봅니다. 
 
-### APR과 APR-util 설치
-Apache 2.4를 소스 코드로부터 설치하려면 [APR(Apache Portable Runtime)](http://apr.apache.org/)이 설치돼 있어야 한다.
-APR은 OS간의 차이를 해결해주는 라이브러리이다. 리눅스만해도 다양한 종류가 있어 OS에 따라 다르게 제공하고 있는 기능이 많이 있다. 따라서 Apache는 APR 라이브러를 사용함으로써 APR의 사용하고 다양한 환경에서도 동작하게 해주는 라이브러리이다. 이전에는 Apache에 포함되어 있었지만 현재는 분리해서 프로젝트가 관리되고 있다. 
-
-[APR 다운로드 페이지](http://apr.apache.org/download.cgi)에서 tar.gz의 소스코드를 다운로드해 설치한다. 현재 APR의 최신 버전은 1.6.3 이다.
-
+#### 초기 상태 확인
+다음 명령어로 로컬 도커 이미지의 현황을 확이할 수 있습니다.
 ```bash
-# cd /usr/local/src
+# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+```
+현재는 헤더만 출력되고 아무것도 나타나지 않습니다. 
+[Doker Hub](https://hub.docker.com/explore/)라고 하는 공개된 Docker 이미지를 관리하는 저장서에서 내려받거나 자체 도커 이미지를 작성한 현황이 나타납니다. 
+
+다음 명령어를 사용하면 로컬 환경의 도커 컨테이너의 현황을 확일 할 수 있습니다. (도커 컨테이너란 도커 이미지를 기반으로 기동된 컨테이너를 말합니다)
+```bash
+# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+```
+아직 컨테니너를 기동하지 않았으므로 아무것도 표시되지 않습니다. 
+
+#### hello-world 이미지를 사용해 컨테이너를 기동하기
+다음 명령어를 사용해 공개되어 있는 hello-world 라는 도커 이미지를 내려받아 컨테이너를 기동시켜봅니다. 
+```bash
+# docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+9db2ca6ccae0: Pull complete
+Digest: sha256:4b8ff392a12ed9ea17784bd3c9a8b1fa3299cac44aca35a85c90c5e3c7afacdc
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/engine/userguide/
+
+```
+
+결과를 보니 이미지를 다운로드 하고 'Hello form Docker!'와 추가적인 메시지가 출력된 것을 확인할 수 있습니다. 
+
+
