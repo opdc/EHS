@@ -148,13 +148,13 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 다음 명령어를 사용해 공개되어 있는 hello-world 라는 도커 이미지를 내려받아 컨테이너를 기동시켜봅니다. 
 ```bash
 # docker run hello-world
-Unable to find image 'hello-world:latest' locally
-latest: Pulling from library/hello-world
+Unable to find image 'hello-world:latest' locally ・・・①
+latest: Pulling from library/hello-world          ・・・②
 9db2ca6ccae0: Pull complete
 Digest: sha256:4b8ff392a12ed9ea17784bd3c9a8b1fa3299cac44aca35a85c90c5e3c7afacdc
 Status: Downloaded newer image for hello-world:latest
 
-Hello from Docker!
+Hello from Docker!   ・・・③
 This message shows that your installation appears to be working correctly.
 
 To generate this message, Docker took the following steps:
@@ -179,4 +179,37 @@ For more examples and ideas, visit:
 
 결과를 보니 이미지를 다운로드 하고 'Hello form Docker!'와 추가적인 메시지가 출력된 것을 확인할 수 있습니다. 
 
+'docker run' 명령어는 도커 이미지를 사용해 컨테이너를 기동하는 명령어입니다. 예제에서는 'hello-world'라는 도커 이미지를 사용해 컨테이너를 기동하고 있습니다. 
+하지만 ①에서 출력된 결과를 보면 최초 로컬 환경에는 도커 이미지가 없었습니다. 따라서 Docker Hub를 검색하여 해당 이미지가 있으면 이미지를 내려받습니다. 그것이 ② 입니다.
+hello-world 이미지 다운로드를 완료하면 해당 이미지를 사용해 컨테이너를 기동합니다. 이 hello-world 이미지는 컨테이너를 기동하면 컨테이너 내에서 ③에 해당하는 이미지를 출력하는 도커 이미지입니다. 
+
+다음 명령어를 실행해 도커 이미지를 내려받았는지 확인합니다. 
+```bash
+# docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+hello-world         latest              2cb0d9787c4d        6 weeks ago         1.85kB
+
+```
+이번 출력 결과에는 hello-world라는 항목이 보입니다. 이것은 조금 전에 docker run 명령어를 실행해 Docker Hub로 부터 다운로드한 도커 이미지입니다. 이번 예제 docker run 명령어를 실행해 도커 이미지를 다운로드하고 컨테이너를 기동했지만 아래 명령어를 사용해 도커 이미지만 다운로드할 수도 있습니다. 
+```bash
+# docker pull hello-world
+```
+다음오로 컨테이너의 상태를 확인해 봅시다. 
+
+```bash
+# docker ps -a
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                   PORTS               NAMES
+1500a8204af5        hello-world         "/hello"            2 hours ago         Exited (0) 2 hours ago                       competent_haibt
+```
+출력 결과를 보면 왼쪽부터 컨테이너ID, 사용한 도커 이미지, 컨테이너 기동 시에 컨테이너 내에서 시행되는 명령어, 컨테이너를 생성한 시점, 컨테이너 상태(기동중, 정지중 등), 포트 포워드 설정, 컨테이너 이름입니다. 
+COMMAND 항목의 '/hello'라는 파일로 ③의 내용을 출력합니다. 
+컨테이너 이름은 특별히 지정하지 않았다면 자동으로 설정됩니다. 
+
+또한 컨테이너 상태는 'Exited'로 되어 있어 정지된 상태입니다. (기동중에는 'Up'으로 표시됩니다)
+컨테이너는 1개의 프로세스는 실행되고 있어야 하며 이 'hello-world' 이미지에서는 메시지를 출력하기만 하는 프로세스로 프로세스가 종료되는 시점에 컨테이너는 종료됩니다. 
+
+
+#### 도커 컨테이너, 이미지 삭제하기
+이번에는 생성한 도커 컨테이너와 내려받은 도커 이미지를 삭제해 봅시다.
+다음 명령어를 사용해 hello-world 컨테이너를 삭자할 수 있습니다. 
 
